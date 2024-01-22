@@ -12,7 +12,7 @@ public class Comentario {
     private Long id;
     private String texto;
 
-    private boolean activo;
+    private Boolean activo;
 
     public Comentario(){
         this.activo = true;

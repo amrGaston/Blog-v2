@@ -1,5 +1,7 @@
-package com.blog.blog.exception;
+package com.blog.blog.config;
 
+import com.blog.blog.exception.ComentarioNoEncontradoException;
+import com.blog.blog.exception.RespuestaError;
 import com.blog.blog.model.Comentario;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,8 +13,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ResponseException extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ComentarioNoEncontradoException.class)
-    public ResponseEntity<Comentario> recursoNoEncontrado(){
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<RespuestaError> handleException(ComentarioNoEncontradoException e){
+        return new ResponseEntity<>(new RespuestaError(e.getMessage(),HttpStatus.NOT_FOUND.value()),HttpStatus.NOT_FOUND);
     }
 
 }

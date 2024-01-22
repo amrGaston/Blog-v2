@@ -22,10 +22,19 @@ public class ComentarioService {
     }
 
     public Comentario getComentario(Long id) throws ComentarioNoEncontradoException {
+        /*
         Optional<Comentario> comentario = comentarioRepository.findById(id);
         if (comentario.isEmpty()){
-            throw new ComentarioNoEncontradoException();
+            throw new ComentarioNoEncontradoException("id no encontrado");
         }
         return comentario.get();
+        */
+
+        return comentarioRepository.findById(id).orElseThrow( () -> {
+            return new ComentarioNoEncontradoException(id);
+        });
+
+
     }
+
 }
