@@ -1,6 +1,9 @@
 package com.blog.blog.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.springframework.lang.NonNull;
 
 @Entity
 @Table(name="comentario")
@@ -10,6 +13,9 @@ public class Comentario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true,nullable = false)
     private Long id;
+
+    @NotNull
+    @NotBlank
     private String texto;
 
     private Boolean activo;

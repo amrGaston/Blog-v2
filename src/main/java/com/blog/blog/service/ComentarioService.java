@@ -31,10 +31,18 @@ public class ComentarioService {
         */
 
         return comentarioRepository.findById(id).orElseThrow( () -> {
-            return new ComentarioNoEncontradoException(id);
+            return new ComentarioNoEncontradoException(id,HttpStatus.NOT_FOUND);
         });
 
 
     }
 
+    public void deleteComentario(Long id) throws ComentarioNoEncontradoException {
+
+        Comentario comentario = comentarioRepository.findById(id).orElseThrow(() -> new ComentarioNoEncontradoException(id,HttpStatus.NOT_FOUND));
+
+        comentario.setActivo(false);
+        comentarioRepository.save(comentario);
+
+    }
 }

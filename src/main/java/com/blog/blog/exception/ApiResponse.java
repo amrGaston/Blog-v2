@@ -1,9 +1,8 @@
 package com.blog.blog.exception;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-public class RespuestaError {
+public class ApiResponse {
     private String mensaje;
     private int estado;
     private LocalDate date = LocalDate.now();
@@ -12,7 +11,7 @@ public class RespuestaError {
         return estado;
     }
 
-    public RespuestaError(String mensaje, int estado) {
+    public ApiResponse(String mensaje, int estado) {
         this.mensaje = mensaje;
         this.estado = estado;
     }

@@ -1,6 +1,7 @@
 package com.blog.blog.exception;
 
-public class GenericException extends Exception{
+public abstract class GenericException extends Exception{
+
 
     public GenericException() {
     }
