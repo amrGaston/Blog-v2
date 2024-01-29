@@ -1,23 +1,20 @@
 package com.blog.blog.exception;
 
+import org.springframework.http.HttpStatus;
+
 import java.time.LocalDate;
 
 public class ApiResponse {
     private String mensaje;
-    private int estado;
     private LocalDate date = LocalDate.now();
+    private HttpStatus httpStatus;
 
-    public int getEstado() {
-        return estado;
-    }
+    private int estado;
 
-    public ApiResponse(String mensaje, int estado) {
+    public ApiResponse(String mensaje, HttpStatus httpStatus) {
         this.mensaje = mensaje;
-        this.estado = estado;
-    }
-
-    public void setEstado(int estado) {
-        this.estado = estado;
+        this.httpStatus = httpStatus;
+        this.estado = this.httpStatus.value();
     }
 
     public String getMensaje() {
@@ -32,4 +29,19 @@ public class ApiResponse {
         return this.date;
     }
 
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
+    }
+
+    public void setHttpStatus(HttpStatus httpStatus) {
+        this.httpStatus = httpStatus;
+    }
+
+    public int getEstado() {
+        return this.estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
 }

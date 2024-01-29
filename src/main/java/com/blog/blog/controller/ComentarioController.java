@@ -1,5 +1,7 @@
 package com.blog.blog.controller;
 
+import com.blog.blog.controller.models.ComentarioResponseModel;
+import com.blog.blog.exception.RequestConErrorException;
 import com.blog.blog.exception.ComentarioNoEncontradoException;
 import com.blog.blog.exception.ApiResponse;
 import com.blog.blog.model.Comentario;
@@ -18,17 +20,18 @@ public class ComentarioController {
     private ComentarioService comentarioService;
 
     @PostMapping(path = "/create")
-    public ResponseEntity<ApiResponse> guardarComentario(@Validated @RequestBody Comentario comentario, BindingResult bindingResult) {
+    public ResponseEntity<ApiResponse> guardarComentario(@Validated @RequestBody Comentario comentario, BindingResult bindingResult) throws RequestConErrorException {
         if (bindingResult.hasErrors()){
-            return new ResponseEntity<>(new ApiResponse("Campo erróneo",HttpStatus.BAD_REQUEST.value()),HttpStatus.BAD_REQUEST);
+            throw new RequestConErrorException();
         }
+
         this.comentarioService.guardarComentario(comentario);
-        return new ResponseEntity<>(new ApiResponse("Comentario creado",HttpStatus.CREATED.value()),HttpStatus.CREATED);
+        return new ResponseEntity<>(new ApiResponse("Comentario creado",HttpStatus.CREATED),HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/{id}")
-    public Comentario getComentario(@PathVariable("id") Long id) throws ComentarioNoEncontradoException {
-        return this.comentarioService.getComentario(id);
+    public ComentarioResponseModel getComentario(@PathVariable("id") Long id) throws ComentarioNoEncontradoException {
+        return new ComentarioResponseModel(this.comentarioService.getComentario(id));
     }
 
     @DeleteMapping("/{id}")
