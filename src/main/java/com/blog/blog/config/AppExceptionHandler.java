@@ -1,5 +1,6 @@
 package com.blog.blog.config;
 
+import com.blog.blog.exception.PostNoEncontradoException;
 import com.blog.blog.exception.RequestConErrorException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -20,6 +21,11 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(RequestConErrorException.class)
     public ResponseEntity<ApiResponse> handleException(RequestConErrorException e){
         return new ResponseEntity<>(new ApiResponse(e.getMessage(), HttpStatus.BAD_REQUEST),HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(PostNoEncontradoException.class)
+    public ResponseEntity<ApiResponse> handleException(PostNoEncontradoException e){
+        return new ResponseEntity<>(new ApiResponse(e.getMessage(), HttpStatus.NOT_FOUND),HttpStatus.NOT_FOUND);
     }
 }
 

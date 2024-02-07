@@ -1,9 +1,7 @@
 package com.blog.blog.controller;
 
 import com.blog.blog.controller.models.ComentarioResponseModel;
-import com.blog.blog.exception.RequestConErrorException;
-import com.blog.blog.exception.ComentarioNoEncontradoException;
-import com.blog.blog.exception.ApiResponse;
+import com.blog.blog.exception.*;
 import com.blog.blog.model.Comentario;
 import com.blog.blog.service.ComentarioService;
 import org.springframework.beans.factory.annotation.Autowired;

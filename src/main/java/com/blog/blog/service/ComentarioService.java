@@ -1,10 +1,10 @@
 package com.blog.blog.service;
 
 import com.blog.blog.exception.ComentarioNoEncontradoException;
+import com.blog.blog.exception.PostNoEncontradoException;
 import com.blog.blog.model.Comentario;
 import com.blog.blog.repository.ComentarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service

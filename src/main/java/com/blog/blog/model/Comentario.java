@@ -1,5 +1,6 @@
 package com.blog.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -18,6 +19,14 @@ public class Comentario {
     private String texto;
 
     private Boolean activo;
+
+    //@NotNull
+    //@NotBlank
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "post_id",nullable = false)
+    @JsonBackReference
+    private Post post;
 
     public Comentario(){
         this.activo = true;
@@ -45,5 +54,13 @@ public class Comentario {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 }
