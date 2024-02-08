@@ -1,6 +1,5 @@
 package com.blog.blog.service;
 
-import com.blog.blog.exception.ComentarioNoEncontradoException;
 import com.blog.blog.exception.PostNoEncontradoException;
 import com.blog.blog.model.Post;
 import com.blog.blog.repository.PostRepository;

@@ -1,11 +1,8 @@
 package com.blog.blog.config;
 
-import com.blog.blog.exception.PostNoEncontradoException;
-import com.blog.blog.exception.RequestConErrorException;
+import com.blog.blog.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import com.blog.blog.exception.ComentarioNoEncontradoException;
-import com.blog.blog.exception.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -25,6 +22,11 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(PostNoEncontradoException.class)
     public ResponseEntity<ApiResponse> handleException(PostNoEncontradoException e){
+        return new ResponseEntity<>(new ApiResponse(e.getMessage(), HttpStatus.NOT_FOUND),HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(UsuarioNoEncontradoException.class)
+    public ResponseEntity<ApiResponse> handleException(UsuarioNoEncontradoException e){
         return new ResponseEntity<>(new ApiResponse(e.getMessage(), HttpStatus.NOT_FOUND),HttpStatus.NOT_FOUND);
     }
 }

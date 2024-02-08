@@ -1,5 +1,6 @@
 package com.blog.blog.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -29,6 +30,11 @@ public class Post {
     @Column(unique = true,nullable = false)
     private Long id;
     private Boolean activo;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "usuario_id",nullable = false)
+    @JsonBackReference
+    private Usuario usuario;
 
     public Post(){
         this.activo = true;
@@ -77,5 +83,13 @@ public class Post {
 
     public void setActivo(Boolean activo) {
         this.activo = activo;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
