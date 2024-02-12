@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/post")
 public class PostController {
@@ -23,10 +25,15 @@ public class PostController {
     @PostMapping(path = "/create")
     public ResponseEntity<ApiResponse> guardarPost(@Validated @RequestBody Post post, BindingResult bindingResult) throws RequestConErrorException {
         if (bindingResult.hasErrors()){
-            throw new RequestConErrorException();
+            //throw new RequestConErrorException();
+            return new ResponseEntity<>(new ApiResponse(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(),HttpStatus.BAD_REQUEST),HttpStatus.BAD_REQUEST);
         }
 
-        this.postService.guardarPost(post);
+        try {
+            this.postService.guardarPost(post);
+        }catch ( Exception e){
+            throw new RequestConErrorException();
+        }
         return new ResponseEntity<>(new ApiResponse("Post creado", HttpStatus.CREATED),HttpStatus.CREATED);
     }
 

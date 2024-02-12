@@ -11,6 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/comentario")
 public class ComentarioController {
@@ -20,10 +22,16 @@ public class ComentarioController {
     @PostMapping(path = "/create")
     public ResponseEntity<ApiResponse> guardarComentario(@Validated @RequestBody Comentario comentario, BindingResult bindingResult) throws RequestConErrorException {
         if (bindingResult.hasErrors()){
+            //throw new RequestConErrorException();
+            return new ResponseEntity<>(new ApiResponse(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(),HttpStatus.BAD_REQUEST),HttpStatus.BAD_REQUEST);
+        }
+
+        try {
+            this.comentarioService.guardarComentario(comentario);
+        }catch ( Exception e){
             throw new RequestConErrorException();
         }
 
-        this.comentarioService.guardarComentario(comentario);
         return new ResponseEntity<>(new ApiResponse("Comentario creado",HttpStatus.CREATED),HttpStatus.CREATED);
     }
 

@@ -1,5 +1,6 @@
 package com.blog.blog.model;
 
+import com.blog.blog.config.Constantes;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -14,15 +15,13 @@ public class Comentario {
     @Column(unique = true,nullable = false)
     private Long id;
 
-    @NotNull
-    @NotBlank
+    @NotNull(message = "El texto " + Constantes.MENSAJE_NO_NULO)
+    @NotBlank(message = "El texto " + Constantes.MENSAJE_NO_VACIO)
     private String texto;
 
     private Boolean activo;
 
-    //@NotNull
-    //@NotBlank
-
+    @NotNull(message = "El post con un atributo 'id' " + Constantes.MENSAJE_NO_NULO)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "post_id",nullable = false)
     @JsonBackReference

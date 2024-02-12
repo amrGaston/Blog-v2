@@ -1,5 +1,6 @@
 package com.blog.blog.model;
 
+import com.blog.blog.config.Constantes;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
@@ -14,11 +15,11 @@ import java.util.List;
 @Table(name="post")
 public class Post {
 
-    @NotNull
-    @NotBlank
+    @NotNull(message = "El título " + Constantes.MENSAJE_NO_NULO)
+    @NotBlank(message = "El título " + Constantes.MENSAJE_NO_VACIO)
     private String titulo;
-    @NotNull
-    @NotBlank
+    @NotNull(message = "El texto " + Constantes.MENSAJE_NO_NULO)
+    @NotBlank(message = "El texto " + Constantes.MENSAJE_NO_VACIO)
     private String texto;
     private LocalDate date = LocalDate.now();
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
@@ -31,6 +32,7 @@ public class Post {
     private Long id;
     private Boolean activo;
 
+    @NotNull(message = "El usuario con un atributo 'id' " + Constantes.MENSAJE_NO_NULO)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "usuario_id",nullable = false)
     @JsonBackReference

@@ -13,6 +13,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
+
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -23,7 +25,8 @@ public class UsuarioController {
     @PostMapping(path = "/create")
     public ResponseEntity<ApiResponse> guardarUsuario(@Validated @RequestBody Usuario usuario, BindingResult bindingResult) throws RequestConErrorException {
         if (bindingResult.hasErrors()){
-            throw new RequestConErrorException();
+            //throw new RequestConErrorException();
+            return new ResponseEntity<>(new ApiResponse(Objects.requireNonNull(bindingResult.getFieldError()).getDefaultMessage(),HttpStatus.BAD_REQUEST),HttpStatus.BAD_REQUEST);
         }
 
         this.usuarioService.guardarUsuario(usuario);

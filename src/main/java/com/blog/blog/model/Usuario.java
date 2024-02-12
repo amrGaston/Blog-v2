@@ -1,7 +1,9 @@
 package com.blog.blog.model;
 
+import com.blog.blog.config.Constantes;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -12,11 +14,12 @@ import java.util.List;
 @Table(name="usuario")
 public class Usuario {
 
-    @NotNull
-    @NotBlank
+    @NotNull(message = "El nombre " + Constantes.MENSAJE_NO_NULO)
+    @NotBlank(message = "El nombre " + Constantes.MENSAJE_NO_VACIO)
     private String nombre;
-    @NotNull
-    @NotBlank
+    @NotNull(message = "El correo " + Constantes.MENSAJE_NO_NULO)
+    @NotBlank(message = "El correo " + Constantes.MENSAJE_NO_VACIO)
+    @Email
     private String correo;
 
     @Id
