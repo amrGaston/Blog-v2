@@ -1,6 +1,6 @@
 package com.blog.blog.service;
 
-import com.blog.blog.exception.UsuarioNoEncontradoException;
+import com.blog.blog.exception.ElementoNoEncontradoException;
 import com.blog.blog.model.Usuario;
 import com.blog.blog.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,19 +14,19 @@ public class UsuarioService {
     public void guardarUsuario(Usuario usuario) {
         usuarioRepository.save(usuario);
     }
-    public Usuario getUsuario(Long id) throws UsuarioNoEncontradoException {
-        Usuario usuario = usuarioRepository.findById(id).orElseThrow( () -> new UsuarioNoEncontradoException(id));
+    public Usuario getUsuario(Long id) throws ElementoNoEncontradoException {
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow( () -> new ElementoNoEncontradoException("Usuario no encontrado con ID: "+ id));
         if(!usuario.isActivo()){
-            throw new UsuarioNoEncontradoException(id);
+            throw new ElementoNoEncontradoException("Usuario no encontrado con ID: "+ id);
         }
 
         return usuario;
     }
-    public void deleteUsuario(Long id) throws UsuarioNoEncontradoException {
-        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNoEncontradoException(id));
+    public void deleteUsuario(Long id) throws ElementoNoEncontradoException {
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new ElementoNoEncontradoException("Usuario no encontrado con ID: "+ id));
 
         if(!usuario.isActivo()){
-            throw new UsuarioNoEncontradoException(id);
+            throw new ElementoNoEncontradoException("Usuario no encontrado con ID: "+ id);
         }
 
         usuario.setActivo(false);

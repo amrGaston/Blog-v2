@@ -2,7 +2,7 @@ package com.blog.blog.controller;
 
 import com.blog.blog.controller.models.PostResponseModel;
 import com.blog.blog.exception.ApiResponse;
-import com.blog.blog.exception.PostNoEncontradoException;
+import com.blog.blog.exception.ElementoNoEncontradoException;
 import com.blog.blog.exception.RequestConErrorException;
 import com.blog.blog.model.Post;
 import com.blog.blog.service.PostService;
@@ -38,13 +38,13 @@ public class PostController {
     }
 
     @GetMapping(path = "/{id}")
-    public PostResponseModel getPost(@PathVariable("id") Long id) throws PostNoEncontradoException {
+    public PostResponseModel getPost(@PathVariable("id") Long id) throws ElementoNoEncontradoException {
         return new PostResponseModel(this.postService.getPost(id));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deletePost(@PathVariable("id") Long id) throws PostNoEncontradoException {
+    public void deletePost(@PathVariable("id") Long id) throws ElementoNoEncontradoException {
         this.postService.deletePost(id);
     }
 

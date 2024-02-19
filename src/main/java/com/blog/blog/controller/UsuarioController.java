@@ -2,8 +2,8 @@ package com.blog.blog.controller;
 
 import com.blog.blog.controller.models.UsuarioResponseModel;
 import com.blog.blog.exception.ApiResponse;
+import com.blog.blog.exception.ElementoNoEncontradoException;
 import com.blog.blog.exception.RequestConErrorException;
-import com.blog.blog.exception.UsuarioNoEncontradoException;
 import com.blog.blog.model.Usuario;
 import com.blog.blog.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,13 +34,13 @@ public class UsuarioController {
     }
 
     @GetMapping(path = "/{id}")
-    public UsuarioResponseModel getUsuario(@PathVariable("id") Long id) throws UsuarioNoEncontradoException {
+    public UsuarioResponseModel getUsuario(@PathVariable("id") Long id) throws ElementoNoEncontradoException {
         return new UsuarioResponseModel(this.usuarioService.getUsuario(id));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteUsuario(@PathVariable("id") Long id) throws UsuarioNoEncontradoException {
+    public void deleteUsuario(@PathVariable("id") Long id) throws ElementoNoEncontradoException {
         this.usuarioService.deleteUsuario(id);
     }
 

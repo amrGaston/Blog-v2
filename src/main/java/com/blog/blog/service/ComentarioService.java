@@ -1,7 +1,6 @@
 package com.blog.blog.service;
 
-import com.blog.blog.exception.ComentarioNoEncontradoException;
-import com.blog.blog.exception.PostNoEncontradoException;
+import com.blog.blog.exception.ElementoNoEncontradoException;
 import com.blog.blog.model.Comentario;
 import com.blog.blog.repository.ComentarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,23 +16,23 @@ public class ComentarioService {
         comentarioRepository.save(comentario);
     }
 
-    public Comentario getComentario(Long id) throws ComentarioNoEncontradoException {
-        Comentario comentario = comentarioRepository.findById(id).orElseThrow( () -> new ComentarioNoEncontradoException(id));
+    public Comentario getComentario(Long id) throws ElementoNoEncontradoException {
+        Comentario comentario = comentarioRepository.findById(id).orElseThrow( () -> new ElementoNoEncontradoException("Comentario no encontrado con ID: "+ id));
 
         if(!comentario.isActivo()){
-            throw new ComentarioNoEncontradoException(id);
+            throw new ElementoNoEncontradoException("Comentario no encontrado con ID: "+ id);
         }
 
         return comentario;
 
     }
 
-    public void deleteComentario(Long id) throws ComentarioNoEncontradoException {
+    public void deleteComentario(Long id) throws ElementoNoEncontradoException {
 
-        Comentario comentario = comentarioRepository.findById(id).orElseThrow(() -> new ComentarioNoEncontradoException(id));
+        Comentario comentario = comentarioRepository.findById(id).orElseThrow(() -> new ElementoNoEncontradoException("Comentario no encontrado con ID: "+ id));
 
         if(!comentario.isActivo()){
-            throw new ComentarioNoEncontradoException(id);
+            throw new ElementoNoEncontradoException("Comentario no encontrado con ID: "+ id);
         }
 
         comentario.setActivo(false);

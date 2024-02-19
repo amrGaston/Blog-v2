@@ -1,7 +1,7 @@
 package com.blog.blog.controller;
 
 import com.blog.blog.controller.models.ComentarioResponseModel;
-import com.blog.blog.exception.ComentarioNoEncontradoException;
+import com.blog.blog.exception.ElementoNoEncontradoException;
 import com.blog.blog.model.Comentario;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -30,7 +29,7 @@ public class ComentarioControllerTest {
     private final ComentarioController comentarioController = new ComentarioController();
     private final ComentarioController comentarioControllerMock = Mockito.mock(ComentarioController.class);
     @BeforeEach
-    void setUp() throws ComentarioNoEncontradoException {
+    void setUp() throws ElementoNoEncontradoException {
         Comentario comentario = new Comentario();
         comentario.setTexto("Un Comentario");
         comentario.setId(1L);
@@ -39,19 +38,19 @@ public class ComentarioControllerTest {
     }
 
     @Test
-    void getComentarioDevuelveComentarioConAtributoTexto() throws ComentarioNoEncontradoException {
+    void getComentarioDevuelveComentarioConAtributoTexto() throws ElementoNoEncontradoException {
         ComentarioResponseModel comentarioResponseModel = comentarioControllerMock.getComentario(1L);
         Assertions.assertEquals("Un Comentario",comentarioResponseModel.getTexto());
     }
 
     @Test
-    void getComentarioDevuelveComentarioConAtributoID() throws ComentarioNoEncontradoException {
+    void getComentarioDevuelveComentarioConAtributoID() throws ElementoNoEncontradoException {
         ComentarioResponseModel comentarioResponseModel = comentarioControllerMock.getComentario(1L);
         Assertions.assertEquals(1L,comentarioResponseModel.getId());
     }
 
     @Test
-    void getComentarioDevuelveRespuestaJson() throws ComentarioNoEncontradoException {
+    void getComentarioDevuelveRespuestaJson() throws ElementoNoEncontradoException {
         ComentarioResponseModel comentarioResponseModel = comentarioControllerMock.getComentario(1L);
         ObjectMapper objectMapper = new ObjectMapper();
         String json = "";

@@ -10,8 +10,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(ComentarioNoEncontradoException.class)
-    public ResponseEntity<ApiResponse> handleException(ComentarioNoEncontradoException e){
+    @ExceptionHandler(ElementoNoEncontradoException.class)
+    public ResponseEntity<ApiResponse> handleException(ElementoNoEncontradoException e){
         return new ResponseEntity<>(new ApiResponse(e.getMessage(), HttpStatus.NOT_FOUND ),HttpStatus.NOT_FOUND);
     }
 
@@ -20,14 +20,5 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(new ApiResponse(e.getMessage(), HttpStatus.BAD_REQUEST),HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(PostNoEncontradoException.class)
-    public ResponseEntity<ApiResponse> handleException(PostNoEncontradoException e){
-        return new ResponseEntity<>(new ApiResponse(e.getMessage(), HttpStatus.NOT_FOUND),HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler(UsuarioNoEncontradoException.class)
-    public ResponseEntity<ApiResponse> handleException(UsuarioNoEncontradoException e){
-        return new ResponseEntity<>(new ApiResponse(e.getMessage(), HttpStatus.NOT_FOUND),HttpStatus.NOT_FOUND);
-    }
 }
 

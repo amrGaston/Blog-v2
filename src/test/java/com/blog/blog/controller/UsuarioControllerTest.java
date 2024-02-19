@@ -1,7 +1,7 @@
 package com.blog.blog.controller;
 
 import com.blog.blog.controller.models.UsuarioResponseModel;
-import com.blog.blog.exception.UsuarioNoEncontradoException;
+import com.blog.blog.exception.ElementoNoEncontradoException;
 import com.blog.blog.model.Usuario;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,12 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -30,7 +28,7 @@ public class UsuarioControllerTest {
     private final UsuarioController usuarioController = new UsuarioController();
     private final UsuarioController usuarioControllerMock = Mockito.mock(UsuarioController.class);
     @BeforeEach
-    void setUp() throws UsuarioNoEncontradoException {
+    void setUp() throws ElementoNoEncontradoException {
         Usuario usuario = new Usuario();
         usuario.setId(1L);
         usuario.setNombre("Gastón");
@@ -42,25 +40,25 @@ public class UsuarioControllerTest {
     }
 
     @Test
-    void getUsuarioDevuelveUsuarioConAtributoNombre() throws UsuarioNoEncontradoException {
+    void getUsuarioDevuelveUsuarioConAtributoNombre() throws ElementoNoEncontradoException {
         UsuarioResponseModel usuarioResponseModel = usuarioControllerMock.getUsuario(1L);
         Assertions.assertEquals("Gastón",usuarioResponseModel.getNombre());
     }
 
     @Test
-    void getUsuarioDevuelveUsuarioConAtributoID() throws UsuarioNoEncontradoException {
+    void getUsuarioDevuelveUsuarioConAtributoID() throws ElementoNoEncontradoException {
         UsuarioResponseModel usuarioResponseModel = usuarioControllerMock.getUsuario(1L);
         Assertions.assertEquals(1L,usuarioResponseModel.getId());
     }
 
     @Test
-    void getUsuarioDevuelveUsuarioConAtributoCorreo() throws UsuarioNoEncontradoException {
+    void getUsuarioDevuelveUsuarioConAtributoCorreo() throws ElementoNoEncontradoException {
         UsuarioResponseModel usuarioResponseModel = usuarioControllerMock.getUsuario(1L);
         Assertions.assertEquals("gaston@gmail.com",usuarioResponseModel.getCorreo());
     }
 
     @Test
-    void getUsuarioDevuelveRespuestaJson() throws UsuarioNoEncontradoException {
+    void getUsuarioDevuelveRespuestaJson() throws ElementoNoEncontradoException {
         UsuarioResponseModel usuarioResponseModel = usuarioControllerMock.getUsuario(1L);
         ObjectMapper objectMapper = new ObjectMapper();
         String json = "";

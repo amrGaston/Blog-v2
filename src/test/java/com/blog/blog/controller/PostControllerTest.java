@@ -1,7 +1,7 @@
 package com.blog.blog.controller;
 
 import com.blog.blog.controller.models.PostResponseModel;
-import com.blog.blog.exception.PostNoEncontradoException;
+import com.blog.blog.exception.ElementoNoEncontradoException;
 import com.blog.blog.model.Post;
 import com.blog.blog.model.Usuario;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -15,10 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 import java.util.ArrayList;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -30,7 +29,7 @@ public class PostControllerTest {
     private final PostController postController = new PostController();
     private final PostController postControllerMock = Mockito.mock(PostController.class);
     @BeforeEach
-    void setUp() throws PostNoEncontradoException {
+    void setUp() throws ElementoNoEncontradoException {
         Post post = new Post();
         post.setId(1L);
         post.setTitulo("Un titulo");
@@ -43,25 +42,25 @@ public class PostControllerTest {
     }
 
     @Test
-    void getPostDevuelvePostConAtributoTitulo() throws PostNoEncontradoException {
+    void getPostDevuelvePostConAtributoTitulo() throws ElementoNoEncontradoException {
         PostResponseModel postResponseModel = postControllerMock.getPost(1L);
         Assertions.assertEquals("Un titulo",postResponseModel.getTitulo());
     }
 
     @Test
-    void getPostDevuelvePostConAtributoTexto() throws PostNoEncontradoException {
+    void getPostDevuelvePostConAtributoTexto() throws ElementoNoEncontradoException {
         PostResponseModel postResponseModel = postControllerMock.getPost(1L);
         Assertions.assertEquals("Un texto",postResponseModel.getTexto());
     }
 
     @Test
-    void getPostDevuelvePostConAtributoID() throws PostNoEncontradoException {
+    void getPostDevuelvePostConAtributoID() throws ElementoNoEncontradoException {
         PostResponseModel postResponseModel = postControllerMock.getPost(1L);
         Assertions.assertEquals(1L,postResponseModel.getId());
     }
 
     @Test
-    void getPostDevuelveRespuestaJson() throws PostNoEncontradoException {
+    void getPostDevuelveRespuestaJson() throws ElementoNoEncontradoException {
         PostResponseModel postResponseModel = postControllerMock.getPost(1L);
         ObjectMapper objectMapper = JsonMapper.builder()
                 .findAndAddModules()

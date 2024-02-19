@@ -36,13 +36,13 @@ public class ComentarioController {
     }
 
     @GetMapping(path = "/{id}")
-    public ComentarioResponseModel getComentario(@PathVariable("id") Long id) throws ComentarioNoEncontradoException {
+    public ComentarioResponseModel getComentario(@PathVariable("id") Long id) throws ElementoNoEncontradoException {
         return new ComentarioResponseModel(this.comentarioService.getComentario(id));
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteComentario(@PathVariable("id") Long id) throws ComentarioNoEncontradoException {
+    public void deleteComentario(@PathVariable("id") Long id) throws ElementoNoEncontradoException {
          this.comentarioService.deleteComentario(id);
     }
 
