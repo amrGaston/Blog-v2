@@ -21,10 +21,9 @@ dependencies {
 	runtimeOnly("com.mysql:mysql-connector-j")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.springframework.boot:spring-boot-starter-validation:3.2.2")
+	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
 
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.0")
-
-
 	implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
 	implementation("org.glassfish.jaxb:jaxb-runtime:4.0.4")
 
