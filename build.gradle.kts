@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.2.1"
 	id("io.spring.dependency-management") version "1.1.4"
+	id("jacoco")
 }
 
 group = "com.blog"
@@ -22,6 +23,8 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("org.springframework.boot:spring-boot-starter-validation:3.2.2")
 	implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
+	testImplementation("org.mockito:mockito-core:5.10.0")
+
 
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.16.0")
 	implementation("jakarta.xml.bind:jakarta.xml.bind-api:4.0.0")
